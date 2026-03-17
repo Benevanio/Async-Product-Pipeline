@@ -11,37 +11,88 @@ const connectOptions = {
   }
 };
 
-stompit.connect(connectOptions, (err, client) => {
-  if (err) {
-    console.error(err);
-    return;
+let isRunning = false;
+
+async function processMessage(body) {
+  const data = JSON.parse(body);
+
+  try {
+    if (data.price <= 0) throw new Error('Invalid price');
+
+    await Product.create({
+      ...data,
+      status: 'SUCCESS'
+    });
+  } catch (e) {
+    await Product.create({
+      ...data,
+      status: 'ERROR'
+    });
+  }
+}
+
+function consumeForWindow(windowMs = 30000) {
+  if (isRunning) {
+    console.log('Consumer is already running, skipping this cycle.');
+    return Promise.resolve();
   }
 
-  const headers = {
-    destination: '/queue/products',
-    ack: 'auto'
-  };
+  isRunning = true;
 
-  client.subscribe(headers, async (error, message) => {
-    if (error) return console.error(error);
-
-    message.readString('utf-8', async (err, body) => {
-      const data = JSON.parse(body);
-
-      try {
-        if (data.price <= 0) throw new Error('Invalid price');
-
-        await Product.create({
-          ...data,
-          status: 'SUCCESS'
-        });
-
-      } catch (e) {
-        await Product.create({
-          ...data,
-          status: 'ERROR'
-        });
+  return new Promise((resolve, reject) => {
+    stompit.connect(connectOptions, (err, client) => {
+      if (err) {
+        isRunning = false;
+        return reject(err);
       }
+
+      const headers = {
+        destination: '/queue/products',
+        ack: 'auto'
+      };
+
+      const subscription = client.subscribe(headers, async (error, message) => {
+        if (error) {
+          console.error(error);
+          return;
+        }
+
+        message.readString('utf-8', async (readErr, body) => {
+          if (readErr) {
+            console.error(readErr);
+            return;
+          }
+
+          try {
+            await processMessage(body);
+          } catch (processErr) {
+            console.error(processErr);
+          }
+        });
+      });
+
+      setTimeout(() => {
+        try {
+          subscription.unsubscribe();
+        } catch (unsubscribeErr) {
+          console.error(unsubscribeErr);
+        }
+
+        client.disconnect();
+        isRunning = false;
+        resolve();
+      }, windowMs);
     });
   });
-});
+}
+
+module.exports = {
+  consumeForWindow
+};
+
+if (require.main === module) {
+  consumeForWindow().catch((err) => {
+    console.error(err);
+    process.exit(1);
+  });
+}
