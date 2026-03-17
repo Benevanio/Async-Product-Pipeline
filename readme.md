@@ -8,6 +8,7 @@ Sistema de processamento assincrono de produtos em lote com Node.js, ActiveMQ e 
 
 
 <img width="1671" height="634" alt="Image" src="https://github.com/user-attachments/assets/87c7e12f-03ec-4946-b2af-5e503078cd5c" />
+<img width="1524" height="403" alt="image" src="https://github.com/user-attachments/assets/5c6814e1-63bf-43b5-8a56-8815dc123827" />
 
 <img width="1089" height="896" alt="Image" src="https://github.com/user-attachments/assets/bd7b4e42-887d-45bf-b054-db2a1d47a624" />
 
