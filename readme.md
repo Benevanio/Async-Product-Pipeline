@@ -81,8 +81,3 @@ curl -X POST http://localhost:3000/products/batch \
     }
   ]'
 ```
-
-## Observacoes
-
-- Se o consumer estiver rodando, as mensagens da fila serao processadas e salvas no MongoDB.
-- No modelo atual, `description` e `imageUrl` sao obrigatorios.
