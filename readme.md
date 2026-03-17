@@ -11,6 +11,8 @@ Sistema de processamento assincrono de produtos em lote com Node.js, ActiveMQ e 
 
 <img width="1089" height="896" alt="Image" src="https://github.com/user-attachments/assets/bd7b4e42-887d-45bf-b054-db2a1d47a624" />
 
+<img width="997" height="940" alt="Image" src="https://github.com/user-attachments/assets/1d76db3a-0603-4c04-80d1-03a55bf67e26" />
+
 
 
 ## Visao Geral
@@ -82,4 +84,11 @@ curl -X POST http://localhost:3000/products/batch \
       "imageUrl": "https://exemplo.com/b.jpg"
     }
   ]'
+```
+
+
+
+```bash
+curl --location 'http://localhost:3000/products' \
+--header 'Content-Type: application/json'
 ```
