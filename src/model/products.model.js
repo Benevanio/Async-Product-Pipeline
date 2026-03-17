@@ -13,6 +13,10 @@ const productSchema = new mongoose.Schema({
     price: {
         type: Number,
         required: true,
+        validate: {
+            validator: (value) => value !== null,
+            message: 'price cannot be null',
+        },
     },
     imageUrl: {
         type: String,
