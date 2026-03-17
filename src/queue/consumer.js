@@ -15,6 +15,10 @@ let isRunning = false;
 
 async function processMessage(body) {
   const data = JSON.parse(body);
+  delete data._id;
+  delete data.__v;
+  delete data.createdAt;
+  delete data.updatedAt;
 
   try {
     if (data.price <= 0) throw new Error('Invalid price');
