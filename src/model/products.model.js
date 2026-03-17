@@ -17,6 +17,15 @@ const productSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    status: {
+        type: String,
+        enum: ['SUCCESS', 'ERROR'],
+        default: 'SUCCESS',
+    },
+    retries: {
+        type: Number,
+        default: 0,
+    },
 }, { timestamps: true });
 
 const Product = mongoose.model('Product', productSchema);

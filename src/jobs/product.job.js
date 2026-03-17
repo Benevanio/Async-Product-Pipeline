@@ -3,7 +3,7 @@ const Product = require('../model/products.model');
 const producer = require('../queue/producer');
 const { consumeForWindow } = require('../queue/consumer');
 
-cron.schedule('*/10 * * * *', async () => {
+async function runRetryAndConsumeJob() {
   console.log('Running retry and consume job...');
 
   try {
@@ -23,4 +23,10 @@ cron.schedule('*/10 * * * *', async () => {
     product.retries += 1;
     await product.save();
   }
+}
+
+cron.schedule('*/10 * * * *', runRetryAndConsumeJob);
+
+runRetryAndConsumeJob().catch((err) => {
+  console.error('Initial retry and consume cycle failed:', err);
 });
