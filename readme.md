@@ -14,6 +14,9 @@ Sistema de processamento assincrono de produtos em lote com Node.js, ActiveMQ e 
 <img width="997" height="940" alt="Image" src="https://github.com/user-attachments/assets/1d76db3a-0603-4c04-80d1-03a55bf67e26" />
 
 
+<img width="1454" height="551" alt="Image" src="https://github.com/user-attachments/assets/0d572a00-eb86-49d3-af16-e633b86ef6e8" />
+
+
 
 ## Visao Geral
 
@@ -32,8 +35,14 @@ Cliente -> API (Controller) -> Service -> Producer -> ActiveMQ -> Consumer -> Mo
 Crie o arquivo `.env` na raiz do projeto com:
 
 ```env
+
 PORT=3000
-MONGO_URI=mongodb://127.0.0.1:27017/cronflow
+MONGO_URI= tua string de conexão com o MongoDB
+STOMP_HOST=localhost
+STOMP_PORT=61613
+STOMP_USER=admin
+STOMP_PASS=admin
+
 ```
 
 ## Como Rodar
