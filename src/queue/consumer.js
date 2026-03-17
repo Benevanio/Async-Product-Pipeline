@@ -2,12 +2,12 @@ const stompit = require('stompit');
 const Product = require('../model/products.model');
 
 const connectOptions = {
-  host: 'localhost',
-  port: 61613,
+  host: process.env.STOMP_HOST || 'localhost',
+  port: Number(process.env.STOMP_PORT) || 61613,
   connectHeaders: {
     host: '/',
-    login: 'admin',
-    passcode: 'admin'
+    login: process.env.STOMP_USER || 'admin',
+    passcode: process.env.STOMP_PASS || 'admin'
   }
 };
 
