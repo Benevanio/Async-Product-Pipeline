@@ -2,6 +2,15 @@
 
 Sistema de processamento assincrono de produtos em lote com Node.js, ActiveMQ e MongoDB.
 
+## Exemplo 
+
+<img width="1510" height="538" alt="Image" src="https://github.com/user-attachments/assets/95d580c8-8461-48e9-af77-75d7f78952b7" />
+
+
+<img width="1089" height="896" alt="Image" src="https://github.com/user-attachments/assets/bd7b4e42-887d-45bf-b054-db2a1d47a624" />
+
+
+
 ## Visao Geral
 
 Fluxo do projeto:
