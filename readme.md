@@ -32,8 +32,14 @@ Cliente -> API (Controller) -> Service -> Producer -> ActiveMQ -> Consumer -> Mo
 Crie o arquivo `.env` na raiz do projeto com:
 
 ```env
+
 PORT=3000
-MONGO_URI=mongodb://127.0.0.1:27017/cronflow
+MONGO_URI= tua string de conexão com o MongoDB
+STOMP_HOST=localhost
+STOMP_PORT=61613
+STOMP_USER=admin
+STOMP_PASS=admin
+
 ```
 
 ## Como Rodar
